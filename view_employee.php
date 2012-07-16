@@ -8,9 +8,9 @@ $employee_id = $_GET['employee_id'];
 
 echo "<a href='index.php'>Главная</a> | ";
 echo "<a href='employee.php'>Сотрудники</a> | ";
-echo "<a href='edit_employee.php'>Изменить данные сотрудника</a> | ";
+echo "<a href='edit_employee.php?employee_id=$employee_id'>Изменить данные сотрудника</a> | ";
 echo "<a href='add_checkup.php?employee_id=$employee_id'>Добавить медосмотр</a> |";
-echo "<a href='delete_employee.php?employee_id=$employee_id'>Удалить сотрудника</a> <br><br><br>";
+echo "<a href='delete_confirm.php?employee_id=$employee_id'>Удалить сотрудника</a> <br><br><br>";
 
 
 
