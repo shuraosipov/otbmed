@@ -4,6 +4,7 @@ require_once 'config/config.php';
 echo "<a href='index.php'>Главная</a> | ";
 echo "<a href='add_job.php'>Добавить профессию</a> | ";
 echo "<a href='add_department.php'>Добавить подразделение</a> | ";
+echo "<a href='add_bad_conditions.php'>Добавить вредные условия</a> | ";
 echo "<a href='add_employee.php'>Добавить сотрудника</a><br><br><br>";
 
 

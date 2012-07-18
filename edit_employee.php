@@ -27,8 +27,8 @@ echo <<<HEREDOC
 	<input type="text" name="name" value="$q[0]"><br>
 	<input type="text" name="surname" value="$q[1]"><br>
 	<input type="text" name="secondname" value="$q[2]"><br>
-	<input type="text" name="department" value="$q[3]"><br>
-	<input type="text" name="job" value="$q[4]"><br>
+	<input type="text" name="department" value="$q[4]"><br>
+	<input type="text" name="job" value="$q[3]"><br>
 	<input type="hidden" name="employee_id" value="$employee_id"><br>
 	<input type="submit" name="update_button"><br>
 </form>
