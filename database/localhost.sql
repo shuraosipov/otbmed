@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июл 18 2012 г., 11:52
+-- Время создания: Июл 19 2012 г., 10:37
 -- Версия сервера: 5.5.16
 -- Версия PHP: 5.3.8
 
@@ -30,21 +30,42 @@ USE `otbmed`;
 
 CREATE TABLE IF NOT EXISTS `bad_condition` (
   `bad_condition_id` int(10) NOT NULL AUTO_INCREMENT,
-  `bad_condition_linkkey` int(11) DEFAULT NULL,
-  `title` varchar(150) NOT NULL,
-  PRIMARY KEY (`bad_condition_id`),
-  KEY `bad_condition_linkkey` (`bad_condition_linkkey`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=10 ;
+  `title` varchar(500) NOT NULL,
+  PRIMARY KEY (`bad_condition_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=11 ;
 
 --
 -- Дамп данных таблицы `bad_condition`
 --
 
-INSERT INTO `bad_condition` (`bad_condition_id`, `bad_condition_linkkey`, `title`) VALUES
-(6, NULL, 'шум'),
-(7, NULL, 'Напряженность'),
-(8, 25, 'Напряженность'),
-(9, 26, 'Напряженность');
+INSERT INTO `bad_condition` (`bad_condition_id`, `title`) VALUES
+(6, '4.1.1. Подъем и перемещ. груза вручную (в кг)'),
+(10, '4.2.3. Работы с персональными электронно-вычислительными машинами (ПЭВМ) лиц, профессионально связынных с эксплуатацией ПЭВМ');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `bad_condition_for_employee`
+--
+
+CREATE TABLE IF NOT EXISTS `bad_condition_for_employee` (
+  `bcfe_id` int(10) NOT NULL AUTO_INCREMENT,
+  `bcfe_linkkey` int(10) NOT NULL,
+  `bc_id` int(10) NOT NULL,
+  PRIMARY KEY (`bcfe_id`),
+  KEY `bcfe_linkkey` (`bcfe_linkkey`)
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=9 ;
+
+--
+-- Дамп данных таблицы `bad_condition_for_employee`
+--
+
+INSERT INTO `bad_condition_for_employee` (`bcfe_id`, `bcfe_linkkey`, `bc_id`) VALUES
+(4, 1, 10),
+(5, 1, 6),
+(6, 29, 10),
+(7, 30, 10),
+(8, 31, 10);
 
 -- --------------------------------------------------------
 
@@ -61,14 +82,6 @@ CREATE TABLE IF NOT EXISTS `checkup` (
   PRIMARY KEY (`checkup_id`),
   KEY `checkup_linkkey` (`checkup_linkkey`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=16 ;
-
---
--- Дамп данных таблицы `checkup`
---
-
-INSERT INTO `checkup` (`checkup_id`, `checkup_linkkey`, `title`, `date`, `next`) VALUES
-(14, 25, 'Флюорография', '2012-01-01', '2013-01-01'),
-(15, 26, 'Анализ крови', '2008-01-01', '2008-01-01');
 
 -- --------------------------------------------------------
 
@@ -129,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `department` (
   `department_id` int(4) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   PRIMARY KEY (`department_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=10 ;
 
 --
 -- Дамп данных таблицы `department`
@@ -140,7 +153,8 @@ INSERT INTO `department` (`department_id`, `title`) VALUES
 (5, 'Ремонтно-строительный участок №2'),
 (6, 'Ремонтно-строительный участок №3'),
 (7, 'Ремонтно-строительный участок №4'),
-(8, 'Ремонтно-строительный участок №5');
+(8, 'Ремонтно-строительный участок №5'),
+(9, 'ИТР');
 
 -- --------------------------------------------------------
 
@@ -153,20 +167,22 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `secondname` varchar(255) NOT NULL,
+  `birth_date` date NOT NULL,
   `department_id` int(10) NOT NULL,
   `job_id` int(10) NOT NULL,
+  `last_checkup` date DEFAULT NULL,
   PRIMARY KEY (`employee_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=32 ;
 
 --
 -- Дамп данных таблицы `employee`
 --
 
-INSERT INTO `employee` (`employee_id`, `name`, `surname`, `secondname`, `department_id`, `job_id`) VALUES
-(23, 'Сопронюк', 'Евгений', 'Владимирович', 1, 5),
-(24, 'Кузнецов', 'Андрей', 'Николаевич', 2, 8),
-(25, 'Сопронюк', 'Евгений', 'Владимирович', 4, 9),
-(26, 'Кузнецов', 'Андрей', 'Вячеславович', 4, 10);
+INSERT INTO `employee` (`employee_id`, `name`, `surname`, `secondname`, `birth_date`, `department_id`, `job_id`, `last_checkup`) VALUES
+(1, 'Сопронюк', 'Евгений', 'Владимирович', '0000-00-00', 4, 9, '2012-11-11'),
+(29, 'Кузнецов', 'Андрей', 'Вячеславович', '0000-00-00', 4, 10, '2012-01-01'),
+(30, 'Хомский', 'Евгений', 'Альбертович', '0000-00-00', 5, 9, '2012-01-01'),
+(31, 'Осипов', 'Александр', 'Михайлович', '2008-07-24', 9, 13, '2011-07-01');
 
 -- --------------------------------------------------------
 
@@ -178,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `job` (
   `job_id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   PRIMARY KEY (`job_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `job`
@@ -188,7 +204,8 @@ INSERT INTO `job` (`job_id`, `title`) VALUES
 (9, 'Начальник участка'),
 (10, 'Прораб'),
 (11, 'Мастер'),
-(12, 'и.о. мастера');
+(12, 'И.О. мастера'),
+(13, 'Инженер-программист');
 
 -- --------------------------------------------------------
 
