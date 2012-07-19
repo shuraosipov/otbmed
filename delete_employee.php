@@ -7,7 +7,7 @@ if (isset($_GET['delete_button']))
 	$query = "DELETE FROM employee WHERE employee_id = '$employee_id'";
 	$result = mysql_query($query) or die ("Ошибка в запросе № 1".mysql_error());
 	
-	$query = "DELETE FROM checkup WHERE checkup_linkkey = '$employee_id'";
+	$query = "DELETE FROM  bad_condition_for_employee WHERE bcfe_linkkey = '$employee_id'";
 	$result = mysql_query($query) or die ("Ошибка в запросе № 2".mysql_error());;
 	
 	
